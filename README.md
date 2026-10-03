@@ -1678,9 +1678,38 @@ $$P_{\text{Laplace}}(X = v \mid \text{Parent}) = \frac{\text{Count}(X = v, \text
 
 ### 10.5 Markov Decision Processes (MDPs) & The Bellman Equation
 
-An MDP is defined by $\langle S, A, T, R, \gamma \rangle$.
+A Markov Decision Process (MDP) is defined by:
 
-$$V^*(s) = \max_{a \in A} \sum_{s'} P(s' \mid s, a) \left[ R(s, a, s') + \gamma V^*(s') \right]$$
+$$
+\langle S, A, T, R, \gamma \rangle
+$$
+
+where:
+
+- $S$ = Set of states
+- $A$ = Set of actions
+- $T$ = Transition model
+- $R$ = Reward function
+- $\gamma$ = Discount factor
+
+The Bellman optimality equation is:
+
+$$
+V^*(s)
+=
+\max_{a \in A}
+\sum_{s'}
+P(s' \mid s,a)
+\left[
+R(s,a,s')
++
+\gamma V^*(s')
+\right]
+$$
+
+where $V^*(s)$ represents the optimal value of state $s$.
+
+#### Example: Temperature-Controlled Environment
 
 ```mermaid
 graph LR
@@ -1699,7 +1728,6 @@ graph LR
     class Cool coolNode
     class Warm warmNode
     class Overheat dangerNode
-```
 
 ---
 
