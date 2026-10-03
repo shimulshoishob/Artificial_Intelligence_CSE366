@@ -18,11 +18,12 @@ Welcome to the **complete, student-first course companion for CSE366 (Artificial
 ### 🎯 How to Use These Notes
 
 1. **Read the "In One Line" summary first:** Grasp the core philosophy and objective before diving into mechanics.
-2. **Follow the Worked Examples & Traces:** Midterms and finals prioritize manual step-by-step traces (e.g., BFS/A\* queues, $\alpha$-$\beta$ cutoffs, CPT joint distributions, Q-learning value tables).
-3. **Inspect the Interactive Diagrams:** Every algorithm and concept includes a color-coded Mermaid diagram with clear state transitions.
-4. **Inspect the Python Snippets:** Cement your conceptual understanding with concise, dependency-free reference code.
-5. **Leverage the Quick Reference Tables:** Use the algorithm comparison and complexity matrices right before your exams.
-6. **Solve the Practice Flash Questions:** Test your active recall at the end of each chapter.
+2. **Follow the Worked Examples & Traces:** Midterms and finals prioritize manual step-by-step traces (e.g., BFS/A\* queues,
+   $\alpha$ - $\beta$ cutoffs, CPT joint distributions, Q-learning value tables).
+4. **Inspect the Interactive Diagrams:** Every algorithm and concept includes a color-coded Mermaid diagram with clear state transitions.
+5. **Inspect the Python Snippets:** Cement your conceptual understanding with concise, dependency-free reference code.
+6. **Leverage the Quick Reference Tables:** Use the algorithm comparison and complexity matrices right before your exams.
+7. **Solve the Practice Flash Questions:** Test your active recall at the end of each chapter.
 
 > [!NOTE]
 > **The Running Real-World Example:**
