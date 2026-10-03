@@ -906,38 +906,51 @@ A deterministic, two-player, zero-sum game is formalized as:
 
 ### 5.2 The Minimax Algorithm
 
-$$\text{Minimax}(s) = \begin{cases} \text{Utility}(s) & \text{if Terminal-Test}(s) \\ \max_{a \in A(s)} \text{Minimax}(\text{Result}(s, a)) & \text{if Player}(s) = \text{MAX} \\ \min_{a \in A(s)} \text{Minimax}(\text{Result}(s, a)) & \text{if Player}(s) = \text{MIN} \end{cases}$$
+The Minimax algorithm chooses the best move assuming that the opponent also plays optimally.
+
+$$
+\text{Minimax}(s)=
+\begin{cases}
+\text{Utility}(s), & \text{if Terminal-Test}(s) \\
+\max\limits_{a \in A(s)}
+\text{Minimax}(\text{Result}(s,a)),
+& \text{if Player}(s)=\text{MAX} \\
+\min\limits_{a \in A(s)}
+\text{Minimax}(\text{Result}(s,a)),
+& \text{if Player}(s)=\text{MIN}
+\end{cases}
+$$
+
+#### Example
 
 ```mermaid
 graph TD
-    subgraph Layer1 [MAX Turn - Maximizes Utility]
-        Root["Root MAX: max(3, 2) = 3"]
-    end
-    subgraph Layer2 [MIN Turn - Minimizes Utility]
-        M1["MIN 1: min(3, 5) = 3"]
-        M2["MIN 2: min(2, 9) = 2"]
-    end
-    subgraph Leaves [Terminal State Utilities]
-        L1["Utility: 3"]
-        L2["Utility: 5"]
-        L3["Utility: 2"]
-        L4["Utility: 9"]
-    end
+    Root["MAX Root: max(3, 2) = 3"]
 
-    Root -->|Left Move (Best)| M1
-    Root -->|Right Move| M2
+    M1["MIN 1: min(3, 5) = 3"]
+    M2["MIN 2: min(2, 9) = 2"]
+
+    L1["Utility: 3"]
+    L2["Utility: 5"]
+    L3["Utility: 2"]
+    L4["Utility: 9"]
+
+    Root --> M1
+    Root --> M2
+
     M1 --> L1
     M1 --> L2
+
     M2 --> L3
     M2 --> L4
 
-    classDef maxNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    classDef minNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
-    classDef leafNode fill:#f1f5f9,stroke:#64748b,stroke-width:1px,color:#0f172a;
+    classDef maxNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    classDef minNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+    classDef leafNode fill:#f1f5f9,stroke:#64748b,stroke-width:1px,color:#0f172a
 
-    class Root maxNode;
-    class M1,M2 minNode;
-    class L1,L2,L3,L4 leafNode;
+    class Root maxNode
+    class M1,M2 minNode
+    class L1,L2,L3,L4 leafNode
 ```
 
 > [!WARNING]
@@ -1601,21 +1614,27 @@ $$P(D \mid +) = \frac{P(+ \mid D)P(D)}{P(+)} = \frac{0.009}{0.0585} \approx \mat
 
 ```mermaid
 graph TD
-    subgraph Chain [1. Causal Chain: A → B → C]
-        C_A["Rain (A)"] --> C_B["Traffic (B)"] --> C_C["Late (C)"]
-        C_Note["A and C conditionally independent given B"]
-    end
-    subgraph Fork [2. Common Cause: A ← B → C]
-        F_A["Karim Late (A)"] <-- F_B["Traffic (B)"] --> F_C["Rahim Late (C)"]
-        F_Note["A and C conditionally independent given B"]
-    end
-    subgraph Collider [3. Collider / Explaining Away: A → B ← C]
-        CL_A["Burglary (A)"] --> CL_B["Alarm (B)"] <-- CL_C["Earthquake (C)"]
-        CL_Note["A and C independent; become dependent given B!"]
+    subgraph Chain["1. Causal Chain: A to B to C"]
+        C_A["Rain A"] --> C_B["Traffic B"]
+        C_B --> C_C["Late C"]
+        C_Note["A and C are conditionally independent given B"]
     end
 
-    classDef boxStyle fill:#f8fafc,stroke:#475569,stroke-width:1px,color:#0f172a;
-    class C_A,C_B,C_C,F_A,F_B,F_C,CL_A,CL_B,CL_C boxStyle;
+    subgraph Fork["2. Common Cause: A from B to C"]
+        F_A["Karim Late A"] --> F_B["Traffic B"]
+        F_B --> F_C["Rahim Late C"]
+        F_Note["A and C are conditionally independent given B"]
+    end
+
+    subgraph Collider["3. Collider: A to B from C"]
+        CL_A["Burglary A"] --> CL_B["Alarm B"]
+        CL_C["Earthquake C"] --> CL_B
+        CL_Note["A and C are independent; they become dependent given B"]
+    end
+
+    classDef boxStyle fill:#f8fafc,stroke:#475569,stroke-width:1px,color:#0f172a
+
+    class C_A,C_B,C_C,F_A,F_B,F_C,CL_A,CL_B,CL_C boxStyle
 ```
 
 > [!IMPORTANT]
@@ -1665,20 +1684,21 @@ $$V^*(s) = \max_{a \in A} \sum_{s'} P(s' \mid s, a) \left[ R(s, a, s') + \gamma 
 
 ```mermaid
 graph LR
-    Cool((Cool)) -->|slow: 100%| Cool
-    Cool -->|fast: 50%| Cool
-    Cool -->|fast: 50%| Warm((Warm))
-    Warm -->|slow: 50%| Cool
-    Warm -->|slow: 50%| Warm
-    Warm -->|fast: 100%| Overheat((Overheated: -10))
+    Cool((Cool)) -->|slow 100%| Cool
+    Cool -->|fast 50%| Cool
+    Cool -->|fast 50%| Warm((Warm))
 
-    classDef coolNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
-    classDef warmNode fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
-    classDef dangerNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    Warm -->|slow 50%| Cool
+    Warm -->|slow 50%| Warm
+    Warm -->|fast 100%| Overheat((Overheated -10))
 
-    class Cool coolNode;
-    class Warm warmNode;
-    class Overheat dangerNode;
+    classDef coolNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    classDef warmNode fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f
+    classDef dangerNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+
+    class Cool coolNode
+    class Warm warmNode
+    class Overheat dangerNode
 ```
 
 ---
@@ -1882,14 +1902,14 @@ print(f"Q(State B, Right): {Q[1, 0]:.2f}")  # Output: 7.50
 
 | Name | Mathematical Equation | Key Use / Context |
 | :--- | :--- | :--- |
-| **Heuristic Admissibility** | $0 \le h(n) \le h^*(n)$ | Guarantees Tree-Search A\* optimality |
-| **Heuristic Consistency** | $h(n) \le c(n, n') + h(n')$ | Guarantees Graph-Search A\* optimality |
-| **Simulated Annealing** | $P(\text{accept}) = e^{\Delta E / T}$ | Escaping local optima in stochastic search |
-| **Bayes' Rule** | $P(H \mid E) = \frac{P(E \mid H)P(H)}{P(E)}$ | Inverse conditional probability updating |
-| **Bayes Net Joint** | $P(X_1, \dots, X_n) = \prod_{i=1}^n P(X_i \mid \text{Parents}(X_i))$ | Factorizing full joint distribution |
-| **Bellman Equation** | $V^*(s) = \max_a \sum_{s'} P(s' \mid s, a)[R(s, a, s') + \gamma V^*(s')]$ | Value iteration for optimal MDP policy |
-| **Q-Learning Update** | $Q(s,a) \leftarrow Q(s,a) + \alpha [r + \gamma \max_{a'} Q(s',a') - Q(s,a)]$ | Model-free off-policy reinforcement learning |
-| **Delta Rule (Backprop)** | $\delta = (y - t) \cdot y(1 - y) \quad\Longrightarrow\quad w_i \leftarrow w_i - \eta \delta x_i$ | Neural network gradient descent weight update |
+| **Heuristic Admissibility** | `0 ≤ h(n) ≤ h*(n)` | Guarantees Tree-Search A* optimality |
+| **Heuristic Consistency** | `h(n) ≤ c(n,n') + h(n')` | Guarantees Graph-Search A* optimality |
+| **Simulated Annealing** | `P(accept) = e^(ΔE/T)` | Escaping local optima in stochastic search |
+| **Bayes' Rule** | `P(H\|E) = P(E\|H)P(H) / P(E)` | Inverse conditional probability updating |
+| **Bayes Net Joint** | `P(X₁,...,Xₙ) = ∏ P(Xᵢ\|Parents(Xᵢ))` | Factorizing the full joint distribution |
+| **Bellman Equation** | `V*(s) = maxₐ Σ P(s'\|s,a)[R(s,a,s') + γV*(s')]` | Value iteration for optimal MDP policy |
+| **Q-Learning Update** | `Q(s,a) ← Q(s,a) + α[r + γ maxₐ' Q(s',a') - Q(s,a)]` | Model-free off-policy reinforcement learning |
+| **Delta Rule (Backpropagation)** | `δ = (y - t)y(1-y)` → `wᵢ ← wᵢ - ηδxᵢ` | Neural-network gradient-descent weight update |
 
 ---
 
