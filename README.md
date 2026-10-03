@@ -4,6 +4,7 @@
   <img src="https://img.shields.io/badge/Course-CSE366%20Artificial%20Intelligence-blue?style=for-the-badge&logo=openai&logoColor=white" alt="Course Badge" />
   <img src="https://img.shields.io/badge/Status-Complete%20Study%20Guide-success?style=for-the-badge&logo=gitbook&logoColor=white" alt="Status Badge" />
   <img src="https://img.shields.io/badge/Python-3.8%2B%20Implementations-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge" />
+  <img src="https://img.shields.io/badge/Diagrams-Interactive%20Mermaid%20Visuals-8A2BE2?style=for-the-badge&logo=diagramsdotnet&logoColor=white" alt="Diagrams Badge" />
   <img src="https://img.shields.io/badge/Exam%20Prep-High%20Yield%20Traces%20%26%20Tips-red?style=for-the-badge&logo=target&logoColor=white" alt="Exam Prep Badge" />
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge" alt="License Badge" />
 </p>
@@ -12,15 +13,16 @@
 
 ## 📖 Welcome & Overview
 
-Welcome to the **complete, student-first course companion for CSE366 (Artificial Intelligence)**. This handbook distills every major topic across the 11 core chapters into plain English, intuitive diagrams, step-by-step mathematical derivations, exam-proven tracing tables, and runnable Python implementations.
+Welcome to the **complete, student-first course companion for CSE366 (Artificial Intelligence)**. This handbook distills every major topic across the 11 core chapters into plain English, intuitive visual diagrams, step-by-step mathematical derivations, exam-proven tracing tables, and runnable Python implementations.
 
 ### 🎯 How to Use These Notes
 
 1. **Read the "In One Line" summary first:** Grasp the core philosophy and objective before diving into mechanics.
 2. **Follow the Worked Examples & Traces:** Midterms and finals prioritize manual step-by-step traces (e.g., BFS/A\* queues, $\alpha$-$\beta$ cutoffs, CPT joint distributions, Q-learning value tables).
-3. **Inspect the Python Snippets:** Cement your conceptual understanding with concise, dependency-free reference code.
-4. **Leverage the Quick Reference Tables:** Use the algorithm comparison and complexity matrices right before your exams.
-5. **Solve the Practice Flash Questions:** Test your active recall at the end of each chapter.
+3. **Inspect the Interactive Diagrams:** Every algorithm and concept includes a color-coded Mermaid diagram with clear state transitions.
+4. **Inspect the Python Snippets:** Cement your conceptual understanding with concise, dependency-free reference code.
+5. **Leverage the Quick Reference Tables:** Use the algorithm comparison and complexity matrices right before your exams.
+6. **Solve the Practice Flash Questions:** Test your active recall at the end of each chapter.
 
 > [!NOTE]
 > **The Running Real-World Example:**
@@ -28,32 +30,38 @@ Welcome to the **complete, student-first course companion for CSE366 (Artificial
 
 ---
 
-## 🗺️ Visual Course Roadmap
+## 🗺️ Interactive Visual Course Roadmap
 
 ```mermaid
 flowchart TD
-    subgraph Foundations [1. Foundations & Search]
-        C1["01. Agents & Environments"] --> C2["02. Uninformed Search (BFS, DFS, UCS, IDS)"]
-        C2 --> C3["03. Informed Search (Greedy, A*, IDA*)"]
-        C3 --> C4["04. Metaheuristics & Optimization (Hill Climbing, GA, SA)"]
+    subgraph Part1 [1. Foundations & Search]
+        C1["01. Agents & Environments"]
+        C2["02. Uninformed Search (BFS, DFS, UCS, IDS)"]
+        C3["03. Informed Search (Greedy, A*, IDA*)"]
+        C4["04. Metaheuristics (Hill Climbing, GA, SA)"]
+        C1 --> C2 --> C3 --> C4
     end
 
-    subgraph Decisions [2. Adversarial & Structured Reasoning]
-        C4 --> C5["05. Adversarial Search (Minimax, Alpha-Beta)"]
-        C5 --> C6["06. Constraint Satisfaction Problems (CSP & AC-3)"]
-        C6 --> C8["08. Knowledge Bases & Logic (Definite Clauses)"]
-        C8 --> C9["09. Classical Planning (STRIPS & Forward Search)"]
+    subgraph Part2 [2. Adversarial & Structured Reasoning]
+        C5["05. Adversarial Search (Minimax, Alpha-Beta)"]
+        C6["06. Constraint Satisfaction (CSP & AC-3)"]
+        C8["08. Knowledge Bases & Logic (Definite Clauses)"]
+        C9["09. Classical Planning (STRIPS Action Models)"]
+        C4 --> C5 --> C6 --> C8 --> C9
     end
 
-    subgraph Learning_Uncertainty [3. Uncertainty & Learning]
-        C9 --> C10["10. Reasoning Under Uncertainty (Bayes, BN, MDP, HMM)"]
-        C10 --> C7["07. Machine Learning & Neural Networks"]
-        C10 --> C11["11. Reinforcement Learning (Q-Learning & SARSA)"]
+    subgraph Part3 [3. Uncertainty & Learning]
+        C10["10. Reasoning Under Uncertainty (Bayes, BN, MDP, HMM)"]
+        C7["07. Machine Learning & Neural Networks"]
+        C11["11. Reinforcement Learning (Q-Learning & SARSA)"]
+        C9 --> C10
+        C10 --> C7
+        C10 --> C11
     end
 
-    classDef fnd fill:#e8f4fd,stroke:#1e88e5,stroke-width:2px;
-    classDef dec fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px;
-    classDef lrn fill:#e8f5e9,stroke:#43a047,stroke-width:2px;
+    classDef fnd fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef dec fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87;
+    classDef lrn fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
     class C1,C2,C3,C4 fnd;
     class C5,C6,C8,C9 dec;
     class C7,C10,C11 lrn;
@@ -154,12 +162,13 @@ Artificial Intelligence (AI) designs computational systems capable of performing
 
 ```mermaid
 flowchart LR
-    subgraph Cycle [The Core AI Loop]
-        P[Perception] --> R[Representation & Search]
-        R --> D[Decision & Reasoning]
-        D --> L[Learning & Adaptation]
-        L --> A[Action Execution]
-    end
+    P["👁️ Perception<br>(Sensory Input)"] --> R["🗺️ Representation<br>(Graph/Logic/Prob)"]
+    R --> D["🧠 Reasoning & Search<br>(Decision Making)"]
+    D --> L["📈 Learning<br>(Experience Update)"]
+    L --> A["🦾 Action<br>(Actuators/Output)"]
+
+    classDef step fill:#f0f9ff,stroke:#0284c7,stroke-width:2px,color:#0369a1;
+    class P,R,D,L,A step;
 ```
 
 #### Core Foundational Pillars
@@ -173,17 +182,27 @@ flowchart LR
 
 ### 1.2 Agents & Environments (PEAS Framework)
 
-An **agent** interacts with an **environment** in a continuous loop:
+An **agent** interacts with an **environment** in a continuous closed loop:
 
 ```mermaid
 flowchart TD
-    E([🌍 Environment]) -->|Percepts / Sensory Data| S[👁️ Sensors]
-    S --> A["🧠 Agent Function f: P* → A"]
-    A --> Ac[🦾 Actuators]
-    Ac -->|Actions| E
+    Env(["🌍 Environment (World / State)"]) -->|Percepts / Raw Signals| Sensors["👁️ Sensors (Cameras, GPS, LiDAR)"]
+    Sensors --> AgentBrain["🧠 Agent Function: f(P*) to Actions"]
+    AgentBrain --> Actuators["🦾 Actuators (Motors, Steering, Display)"]
+    Actuators -->|Actions / Interventions| Env
+
+    classDef envStyle fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef sensStyle fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1;
+    classDef brainStyle fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95;
+    classDef actStyle fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class Env envStyle;
+    class Sensors sensStyle;
+    class AgentBrain brainStyle;
+    class Actuators actStyle;
 ```
 
-- **Percept:** The current sensory input.
+- **Percept:** The current sensory input at one instance.
 - **Percept Sequence ($P^*$):** The complete history of all sensory inputs received to date.
 - **Agent Function:** An abstract mathematical mapping from percept sequences to actions ($f: P^* \rightarrow A$).
 - **Agent Program:** The concrete software implementation executing the agent function on a physical architecture.
@@ -198,13 +217,19 @@ flowchart TD
 
 #### Environmental Dimensions & Taxonomies
 
-```
-                  ┌── Fully Observable vs Partially Observable
-                  ├── Deterministic vs Stochastic
-Environment ──────┼── Episodic vs Sequential
-Dimensions        ├── Static vs Dynamic
-                  ├── Discrete vs Continuous
-                  └── Single-Agent vs Multi-Agent (Competitive / Cooperative)
+```mermaid
+flowchart LR
+    EnvDim["🌐 Environment Dimensions"] --> Obs["Observability: Fully vs Partially"]
+    EnvDim --> Det["Determinism: Deterministic vs Stochastic"]
+    EnvDim --> Ep["Episodicity: Episodic vs Sequential"]
+    EnvDim --> Dyn["Dynamism: Static vs Dynamic"]
+    EnvDim --> Val["Continuity: Discrete vs Continuous"]
+    EnvDim --> Ag["Agents: Single-Agent vs Multi-Agent"]
+
+    classDef main fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95;
+    classDef branch fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155;
+    class EnvDim main;
+    class Obs,Det,Ep,Dyn,Val,Ag branch;
 ```
 
 | Dimension | Easy Setting | Hard Setting | Real-World Hard Case Example |
@@ -220,9 +245,15 @@ Dimensions        ├── Static vs Dynamic
 
 ### 1.3 Agent Architectures & Hierarchical Control
 
-```
-Simple Reflex ──► Model-Based Reflex ──► Goal-Based ──► Utility-Based ──► Learning Agent
- (Condition-Action)    (Internal Memory)      (Needs Target)     (Scores Happiness)  (Self-Improving)
+```mermaid
+flowchart LR
+    A1["1. Simple Reflex<br>(Condition-Action)"] --> A2["2. Model-Based<br>(Internal Memory)"]
+    A2 --> A3["3. Goal-Based<br>(Target Directed)"]
+    A3 --> A4["4. Utility-Based<br>(Happiness Score)"]
+    A4 --> A5["5. Learning Agent<br>(Self-Improving)"]
+
+    classDef arch fill:#f1f5f9,stroke:#475569,stroke-width:2px,color:#0f172a;
+    class A1,A2,A3,A4,A5 arch;
 ```
 
 1. **Simple Reflex Agent:** Fires condition-action rules purely based on current percept (no memory).
@@ -231,18 +262,26 @@ Simple Reflex ──► Model-Based Reflex ──► Goal-Based ──► Utilit
 4. **Utility-Based Agent:** Uses a continuous utility function ($U: S \rightarrow \mathbb{R}$) to trade off competing goals (e.g., speed vs safety).
 5. **Learning Agent:** Composed of a *Critic* (evaluates performance), *Learning Element* (makes improvements), *Performance Element* (chooses actions), and *Problem Generator* (suggests exploratory actions).
 
-#### Hierarchical Agent Control
+#### Hierarchical Agent Control Stack
 
 ```mermaid
 graph TD
-    High["Top Layer: Strategic Planner (Minutes/Hours)<br>E.g., Select Delivery Route Dhanmondi → Gulshan"]
+    High["Top Layer: Strategic Planner (Minutes/Hours)<br>E.g., Select Route: Dhanmondi to Gulshan"]
     Mid["Middle Layer: Tactical Navigation (Seconds)<br>E.g., Lane changing, overtaking slow rickshaw"]
-    Low["Low Layer: Reactive Execution (Milliseconds)<br>E.g., Emergency brake on bump detection"]
+    Low["Low Layer: Reactive Execution (Milliseconds)<br>E.g., Emergency brake on sudden obstacle"]
 
     High -->|Route Waypoints| Mid
     Mid -->|Steering / Speed Target| Low
-    Low -->|Telemetry / Status| Mid
-    Mid -->|Progress / Blockages| High
+    Low -.->|Telemetry / Bump Status| Mid
+    Mid -.->|Traffic Progress / Blockages| High
+
+    classDef l1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef l2 fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px,color:#312e81;
+    classDef l3 fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843;
+
+    class High l1;
+    class Mid l2;
+    class Low l3;
 ```
 
 ---
@@ -289,8 +328,13 @@ graph LR
     C -- 9 --> G
     D -- 1 --> G
 
-    classDef goal fill:#d4edda,stroke:#28a745,stroke-width:3px;
-    class G goal;
+    classDef startNode fill:#dbeafe,stroke:#2563eb,stroke-width:3px,color:#1e3a8a;
+    classDef midNode fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#0f172a;
+    classDef goalNode fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#14532d;
+
+    class S startNode;
+    class A,B,C,D midNode;
+    class G goalNode;
 ```
 
 **Alternative Paths & Costs:**
@@ -306,6 +350,31 @@ graph LR
 - **Goal Test Timing:** Applied when node is **generated**.
 - **Properties:** Complete (if branching factor $b$ is finite). Optimal if and only if all step costs are identical.
 - **Time Complexity:** $O(b^d)$, **Space Complexity:** $O(b^d)$ (where $d$ is goal depth).
+
+```mermaid
+graph TD
+    subgraph Level0 [Depth 0]
+        S["S"]
+    end
+    subgraph Level1 [Depth 1]
+        A["A"]
+        B["B"]
+    end
+    subgraph Level2 [Depth 2]
+        C["C"]
+        D["D"]
+        G["G (Goal Found!)"]
+    end
+
+    S --> A
+    S --> B
+    A --> C
+    A --> D
+    B --> G
+
+    classDef active fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class G active;
+```
 
 #### Manual Trace on Benchmark Graph
 
@@ -387,12 +456,20 @@ Runs two concurrent searches: **Forward** from Initial State and **Backward** fr
 
 ```mermaid
 graph LR
-    subgraph Forward [Forward Frontier O(b^{d/2})]
-        S((Start)) --> F1(( )) --> F2((Intersection))
+    subgraph ForwardSide [Forward Search Frontier: O b^d/2]
+        StartNode((Start S)) --> F1((Node F1)) --> MidNode((Intersection))
     end
-    subgraph Backward [Backward Frontier O(b^{d/2})]
-        F2 --> B1(( )) --> G(((Goal)))
+    subgraph BackwardSide [Backward Search Frontier: O b^d/2]
+        MidNode --> B1((Node B1)) --> GoalNode(((Goal G)))
     end
+
+    classDef fwd fill:#dbeafe,stroke:#2563eb,stroke-width:2px;
+    classDef bwd fill:#fce7f3,stroke:#db2777,stroke-width:2px;
+    classDef meet fill:#dcfce7,stroke:#16a34a,stroke-width:3px;
+
+    class StartNode,F1 fwd;
+    class GoalNode,B1 bwd;
+    class MidNode meet;
 ```
 
 $$b^{d/2} + b^{d/2} \ll b^d$$
@@ -474,20 +551,24 @@ The goal test must be applied when a node is **expanded (popped from priority qu
 - **Heuristic Function $h(n)$:** Estimated path cost from node $n$ to the nearest goal state ($h(Goal) = 0$).
 - **True Remaining Cost $h^*(n)$:** The exact, optimal cost from node $n$ to goal.
 
-```
-                      ┌── Admissible: 0 ≤ h(n) ≤ h*(n) [Never overestimates]
-Heuristic Properties ─┤
-                      └── Consistent (Monotone): h(n) ≤ c(n, a, n') + h(n') [Triangle inequality]
-```
+```mermaid
+flowchart TD
+    subgraph HeuristicRules [Heuristic Function Properties]
+        Adm["1. Admissibility<br>0 ≤ h(n) ≤ h*(n)<br>(Never overestimates true cost)"]
+        Cons["2. Consistency (Monotonicity)<br>h(n) ≤ c(n, a, n') + h(n')<br>(Triangle Inequality)"]
+        Dom["3. Dominance<br>h2(n) ≥ h1(n) for all n<br>(h2 expands fewer nodes)"]
+    end
 
-> [!IMPORTANT]
-> **Admissibility vs Consistency:**
-> - **Admissibility:** $h(n) \le h^*(n)$ for all $n$. Guarantees **Tree Search A\*** is optimal.
-> - **Consistency (Monotonicity):** $h(n) \le c(n, n') + h(n')$. Guarantees **Graph Search A\*** is optimal without needing to re-open nodes in the closed set.
-> - *Every consistent heuristic is admissible.*
+    Adm -->|Required for| TreeOpt["Tree Search A* Optimality"]
+    Cons -->|Required for| GraphOpt["Graph Search A* Optimality (No Re-opening)"]
+    Cons -->|Implies| Adm
 
-#### Dominance
-If $h_2(n) \ge h_1(n)$ for all $n$ and both are admissible, $h_2$ **dominates** $h_1$. A\* using $h_2$ will expand fewer or equal nodes compared to $h_1$. (e.g., Manhattan Distance dominates Misplaced Tiles in 8-Puzzle).
+    classDef ruleBox fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef optBox fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+
+    class Adm,Cons,Dom ruleBox;
+    class TreeOpt,GraphOpt optBox;
+```
 
 #### Benchmark Heuristic Table for Graph
 
@@ -519,6 +600,22 @@ If $h_2(n) \ge h_1(n)$ for all $n$ and both are admissible, $h_2$ **dominates** 
   - $g(n)$: Exact accumulated cost from start to $n$.
   - $h(n)$: Estimated cost from $n$ to goal.
   - $f(n)$: Estimated total cost of optimal path through $n$.
+
+```mermaid
+graph TD
+    S["S: g=0, h=7 ⇒ f=7"] --> A["A: g=1, h=6 ⇒ f=7"]
+    S --> B["B: g=5, h=5 ⇒ f=10"]
+    A --> C["C: g=3, h=7 ⇒ f=10"]
+    A --> D["D: g=7, h=1 ⇒ f=8"]
+    D --> G["G: g=8, h=0 ⇒ f=8 (OPTIMAL GOAL)"]
+    B -.-> BG["G via B: g=11, f=11 (Pruned)"]
+
+    classDef bestPath fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef otherPath fill:#f1f5f9,stroke:#94a3b8,stroke-width:1px,color:#475569;
+
+    class S,A,D,G bestPath;
+    class B,C,BG otherPath;
+```
 
 #### Step-by-Step Manual Trace
 
@@ -612,15 +709,18 @@ When $h(n) = 0$, $f(n) = g(n) + 0 = g(n)$, reducing A\* identically to **Uniform
 
 Hill climbing begins with an arbitrary state and iteratively shifts towards the neighbor with the highest objective improvement.
 
-```
-       Global Maximum
-           ▲
-          / \        Local Maximum
-         /   \           ▲
-        /     \         / \       Shoulder
-       /       \       /   \___  ________
-      /         \_____/        \/
-                 Plateau
+```mermaid
+graph TD
+    subgraph OptimizationLandscape [State Space Landscape Topology]
+        GM["🏔️ Global Maximum<br>(Target Optimal Solution)"]
+        LM["⛰️ Local Maximum<br>(Traps Greedy Search)"]
+        PL["🏞️ Flat Plateau<br>(Zero Gradient Walk)"]
+        SH["🧗 Shoulder<br>(Leads upward later)"]
+        RD["🔪 Narrow Ridge<br>(Requires Zig-Zag steps)"]
+    end
+
+    classDef landStyle fill:#f8fafc,stroke:#475569,stroke-width:2px,color:#0f172a;
+    class GM,LM,PL,SH,RD landStyle;
 ```
 
 #### Landscape Pathologies
@@ -649,15 +749,23 @@ Simulated Annealing mimics the metallurgical cooling process, permitting downhil
 
 ```mermaid
 flowchart TD
-    Start([Generate Candidate Solution]) --> Eval[Evaluate Neighbor State]
-    Eval --> Check{Is Neighbor Better? ΔE > 0}
-    Check -- Yes --> Accept[Accept Move Automatically]
-    Check -- No --> Prob["Accept with Probability P = e^(ΔE / T)"]
-    Accept --> Cool[Decrease Temperature: T ← α · T]
+    Start(["Generate Initial Candidate Solution"]) --> Eval["Evaluate Neighbor State"]
+    Eval --> Check{"Is Neighbor Better? (ΔE > 0)"}
+    Check -- Yes --> Accept["Accept Neighbor Move"]
+    Check -- No --> Prob["Accept with Prob: exp(ΔE / T)"]
+    Accept --> Cool["Decrease Temp: T ← α · T"]
     Prob --> Cool
-    Cool --> StopCheck{Temperature Low Enough?}
+    Cool --> StopCheck{"Is Temperature Minimum?"}
     StopCheck -- No --> Eval
-    StopCheck -- Yes --> Done([Return Best Solution])
+    StopCheck -- Yes --> Done(["Return Best Solution"])
+
+    classDef process fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef term fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+
+    class Eval,Accept,Cool,Prob process;
+    class Check,StopCheck decision;
+    class Start,Done term;
 ```
 
 #### Acceptance Probability Formula
@@ -673,8 +781,16 @@ $$P(\text{accept}) = e^{\frac{\Delta E}{T}}$$
 
 Genetic Algorithms simulate Darwinian natural selection across a population of candidate chromosome bit-strings.
 
-```
-[Population] ──► [Fitness Evaluation] ──► [Roulette Selection] ──► [Crossover] ──► [Mutation] ──► [New Generation]
+```mermaid
+flowchart LR
+    Pop["1. Population<br>(Bit Chromosomes)"] --> Fit["2. Fitness Score<br>f(x) Evaluation"]
+    Fit --> Sel["3. Selection<br>(Roulette Wheel)"]
+    Sel --> Cross["4. Crossover<br>(Tail Swapping)"]
+    Cross --> Mut["5. Mutation<br>(Bit Flip)"]
+    Mut --> Pop
+
+    classDef gaStep fill:#faf5ff,stroke:#9333ea,stroke-width:2px,color:#581c87;
+    class Pop,Fit,Sel,Cross,Mut gaStep;
 ```
 
 #### Comprehensive Worked Example: Maximizing $f(x) = x^2$ for $x \in [0, 31]$ (5-bit String)
@@ -793,31 +909,34 @@ $$\text{Minimax}(s) = \begin{cases} \text{Utility}(s) & \text{if Terminal-Test}(
 
 ```mermaid
 graph TD
-    subgraph Layer1 [MAX Turn]
+    subgraph Layer1 [MAX Turn - Maximizes Utility]
         Root["Root MAX: max(3, 2) = 3"]
     end
-    subgraph Layer2 [MIN Turn]
+    subgraph Layer2 [MIN Turn - Minimizes Utility]
         M1["MIN 1: min(3, 5) = 3"]
         M2["MIN 2: min(2, 9) = 2"]
     end
-    subgraph Leaves [Terminal Utility Values]
-        L1["3"]
-        L2["5"]
-        L3["2"]
-        L4["9"]
+    subgraph Leaves [Terminal State Utilities]
+        L1["Utility: 3"]
+        L2["Utility: 5"]
+        L3["Utility: 2"]
+        L4["Utility: 9"]
     end
 
-    Root -->|Left Move| M1
+    Root -->|Left Move (Best)| M1
     Root -->|Right Move| M2
     M1 --> L1
     M1 --> L2
     M2 --> L3
     M2 --> L4
 
-    classDef maxNode fill:#bbdefb,stroke:#1976d2,stroke-width:2px;
-    classDef minNode fill:#ffcdd2,stroke:#d32f2f,stroke-width:2px;
+    classDef maxNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef minNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    classDef leafNode fill:#f1f5f9,stroke:#64748b,stroke-width:1px,color:#0f172a;
+
     class Root maxNode;
     class M1,M2 minNode;
+    class L1,L2,L3,L4 leafNode;
 ```
 
 > [!WARNING]
@@ -841,7 +960,7 @@ graph TD
     end
     subgraph Level1 [MIN Nodes]
         M1["MIN A: 3"]
-        M2["MIN B: ≤2"]
+        M2["MIN B: <= 2"]
         M3["MIN C: 2"]
     end
     subgraph Level2 [Terminal Leaves]
@@ -849,8 +968,8 @@ graph TD
         A2["12"]
         A3["8"]
         B1["2"]
-        B2["4 (✂️ Pruned)"]
-        B3["6 (✂️ Pruned)"]
+        B2["4 (PRUNED)"]
+        B3["6 (PRUNED)"]
         C1["14"]
         C2["5"]
         C3["2"]
@@ -863,14 +982,19 @@ graph TD
     M1 --> A2
     M1 --> A3
     M2 --> B1
-    M2 -.- B2
-    M2 -.- B3
+    M2 -.-> B2
+    M2 -.-> B3
     M3 --> C1
     M3 --> C2
     M3 --> C3
 
-    classDef pruned fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray: 5 5;
-    class B2,B3 pruned;
+    classDef maxNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef minNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    classDef pruneNode fill:#f1f5f9,stroke:#94a3b8,stroke-dasharray: 4 4,color:#64748b;
+
+    class Root maxNode;
+    class M1,M2,M3 minNode;
+    class B2,B3 pruneNode;
 ```
 
 #### Step-by-Step Trace of Pruning
@@ -951,19 +1075,26 @@ A CSP comprises:
 
 ```mermaid
 graph TD
-    WA((WA)) --- NT((NT))
-    WA --- SA((SA))
+    WA((WA: Red)) --- NT((NT: Green))
+    WA --- SA((SA: Blue))
     NT --- SA
-    NT --- Q((Q))
+    NT --- Q((Q: Red))
     SA --- Q
-    SA --- NSW((NSW))
-    SA --- V((V))
+    SA --- NSW((NSW: Green))
+    SA --- V((V: Red))
     Q --- NSW
     NSW --- V
-    T((T))
+    T((T: Any Color))
 
-    classDef reg fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
-    class WA,NT,SA,Q,NSW,V,T reg;
+    classDef rNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    classDef gNode fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef bNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef tNode fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#0f172a;
+
+    class WA,Q,V rNode;
+    class NT,NSW gNode;
+    class SA bNode;
+    class T tNode;
 ```
 
 - **Variables:** $\{WA, NT, SA, Q, NSW, V, T\}$
@@ -983,15 +1114,25 @@ An arc $X_i \rightarrow X_j$ is **arc-consistent** if for *every* value $x \in D
 
 ```mermaid
 flowchart TD
-    Init[Initialize Queue with all directed Arcs in CSP] --> Pop[Pop Arc Xi → Xj from Queue]
-    Pop --> Revise{Revise Domain Di? Remove unsupported values}
-    Revise -- Values Removed --> CheckEmpty{Is Di Empty?}
-    CheckEmpty -- Yes --> Fail[Return Inconsistency / Failure]
-    CheckEmpty -- No --> AddNeighbors[Add all Arcs Xk → Xi to Queue]
-    Revise -- No Change --> CheckQueue{Is Queue Empty?}
+    Init["Initialize Queue with all directed Arcs in CSP"] --> Pop["Pop Arc (X_i to X_j) from Queue"]
+    Pop --> Revise{"Revise Domain D_i? (Prune illegal values)"}
+    Revise -- Values Pruned --> CheckEmpty{"Is D_i Empty?"}
+    CheckEmpty -- Yes --> Fail(["Return Inconsistency / Failure"])
+    CheckEmpty -- No --> AddNeighbors["Add all Arcs (X_k to X_i) back to Queue"]
+    Revise -- No Change --> CheckQueue{"Is Queue Empty?"}
     AddNeighbors --> CheckQueue
     CheckQueue -- No --> Pop
-    CheckQueue -- Yes --> Success[CSP is Arc-Consistent]
+    CheckQueue -- Yes --> Success(["CSP is Arc-Consistent"])
+
+    classDef step fill:#f8fafc,stroke:#475569,stroke-width:2px,color:#0f172a;
+    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef pass fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef fail fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+
+    class Init,Pop,AddNeighbors step;
+    class Revise,CheckEmpty,CheckQueue decision;
+    class Success pass;
+    class Fail fail;
 ```
 
 ---
@@ -1000,11 +1141,21 @@ flowchart TD
 
 Standard CSP Backtracking is a recursive depth-first search assigning one variable at a time. Three core heuristics accelerate search performance:
 
-```
-Variable Ordering Heuristics ──┬── Minimum Remaining Values (MRV): "Fail-First" (Fewest legal values left)
-                               └── Degree Heuristic: Tie-breaker (Variable connected to most unassigned neighbors)
+```mermaid
+flowchart LR
+    subgraph VarOrder [Variable Ordering]
+        MRV["Minimum Remaining Values (MRV)<br>Fail-First: Pick variable with fewest legal values"]
+        DEG["Degree Heuristic<br>Tie-Breaker: Pick variable with most active constraints"]
+    end
+    subgraph ValOrder [Value Ordering]
+        LCV["Least Constraining Value (LCV)<br>Fail-Last: Pick value pruning fewest neighbor options"]
+    end
 
-Value Ordering Heuristics    ──── Least Constraining Value (LCV): "Fail-Last" (Prunes fewest options from neighbors)
+    classDef vo fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px,color:#312e81;
+    classDef val fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843;
+
+    class MRV,DEG vo;
+    class LCV val;
 ```
 
 | Heuristic | Question Answered | Operational Rule | Intuitive Rationale |
@@ -1078,35 +1229,38 @@ $$\text{Traditional: } \text{Data} + \text{Rules} \rightarrow \text{Answers} \qq
 - **Unsupervised Learning:** Unlabeled data; clusters patterns (K-Means, PCA).
 - **Reinforcement Learning:** Learns through scalar reward feedback from environment.
 
-```
-Underfitting (High Bias) ◄────── Balanced (Generalization) ──────► Overfitting (High Variance)
- [Model is too simple]             [Captures true signal]            [Memorizes noise]
-```
-
 ---
 
 ### 7.2 Artificial Neural Networks & Activation Functions
 
 ```mermaid
 graph LR
-    subgraph Inputs [Inputs]
-        x1["x₁"]
-        x2["x₂"]
-        b["Bias (+1)"]
+    subgraph Inputs [Input Vector]
+        x1["Input x1"]
+        x2["Input x2"]
+        b["Bias b (+1)"]
     end
-    subgraph Processing [Artificial Neuron]
-        Sum["Weighted Sum: z = w₁x₁ + w₂x₂ + b"]
-        Act["Activation: y = f(z)"]
+    subgraph Neuron [Artificial Processing Unit]
+        Sum["Linear Combination:<br>z = w1·x1 + w2·x2 + b"]
+        Act["Non-Linear Activation:<br>y = σ(z)"]
     end
-    subgraph Output [Prediction]
-        y["Output y"]
+    subgraph Output [Model Prediction]
+        y["Prediction y"]
     end
 
-    x1 -->|w₁| Sum
-    x2 -->|w₂| Sum
-    b -->|b| Sum
+    x1 -->|Weight w1| Sum
+    x2 -->|Weight w2| Sum
+    b -->|Weight 1.0| Sum
     Sum --> Act
     Act --> y
+
+    classDef inNode fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1;
+    classDef sumNode fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95;
+    classDef outNode fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class x1,x2,b inNode;
+    class Sum,Act sumNode;
+    class y outNode;
 ```
 
 $$z = \sum_{i=1}^{n} w_i x_i + b \qquad\Longrightarrow\qquad y = \sigma(z) = \frac{1}{1 + e^{-z}}$$
@@ -1128,9 +1282,19 @@ Backpropagation implements the multivariate calculus **chain rule** to propagate
 
 ```mermaid
 flowchart LR
-    Fwd["Forward Pass: Input x → Hidden h → Output y"] --> Loss["Loss Compute: E = ½(t - y)²"]
-    Loss --> Back["Backward Pass: Compute δ = ∂E/∂z"]
-    Back --> Update["Weight Updates: w_new = w_old - η · δ · x"]
+    Fwd["Forward Pass:<br>x → Linear z → Activation y"] --> Loss["Compute Loss:<br>E = 0.5 * (target - y)²"]
+    Loss --> Back["Backward Pass:<br>δ = (y - target) · y(1 - y)"]
+    Back --> Update["Gradient Update:<br>w_new = w_old - η · δ · x"]
+
+    classDef fwdStyle fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef lossStyle fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    classDef backStyle fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95;
+    classDef updStyle fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class Fwd fwdStyle;
+    class Loss lossStyle;
+    class Back backStyle;
+    class Update updStyle;
 ```
 
 #### Detailed Single Neuron Calculation Walkthrough
@@ -1224,14 +1388,20 @@ switch_up.
 ```mermaid
 graph TD
     subgraph BottomUp [Forward Chaining: Data-Driven]
-        F1[breaker_ok, switch_up] -->|Fires power_ok rule| F2[+ power_ok]
-        F2 -->|Fires light_on rule| F3[+ light_on Target Proved!]
+        F1["Facts: breaker_ok, switch_up"] -->|Fires Rule 1| F2["Infers: power_ok"]
+        F2 -->|Fires Rule 2| F3["Infers: light_on (Goal Proved!)"]
     end
     subgraph TopDown [Backward Chaining: Goal-Driven]
-        Q[Query: light_on?] --> Q1[Needs switch_up & power_ok]
-        Q1 --> Q2[switch_up is Fact; power_ok needs breaker_ok]
-        Q2 --> Q3[breaker_ok is Fact; Proof Complete!]
+        Q["Query: light_on?"] --> Q1["Subgoals: switch_up AND power_ok"]
+        Q1 --> Q2["switch_up: Ground Fact<br>power_ok: Needs breaker_ok"]
+        Q2 --> Q3["breaker_ok: Ground Fact (Q.E.D.)"]
     end
+
+    classDef fcStyle fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef bcStyle fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+
+    class F1,F2,F3 fcStyle;
+    class Q,Q1,Q2,Q3 bcStyle;
 ```
 
 | Attribute | Bottom-Up (Forward Chaining) | Top-Down (Backward Chaining) |
@@ -1264,7 +1434,15 @@ graph TD
     Switch --> Fan["Fan: ok_fan"]
     Obs1["Observed: Light is OFF"] -.-> Light
     Obs2["Observed: Fan is OFF"] -.-> Fan
-    Diag["Minimal Diagnosis: {ok_switch = False}<br>(One failure explains both symptoms)"]
+    Diag["Minimal Diagnosis: ok_switch = False<br>(Single fault explains both symptoms)"]
+
+    classDef comp fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#0f172a;
+    classDef obs fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    classDef diag fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class Switch,Light,Fan comp;
+    class Obs1,Obs2 obs;
+    class Diag diag;
 ```
 
 ---
@@ -1305,24 +1483,34 @@ print(f"Query Proved: {success} | Derived Knowledge Base: {conclusions}")
 
 ### 9.1 Action Representations & The STRIPS Assumption
 
-```
-STRIPS Action Schema ──┬── Action Name: Operator identification
-                       ├── Preconditions: Predicates that MUST be satisfied prior to execution
-                       └── Effects: Changes made to state (Add-List & Delete-List)
+```mermaid
+flowchart LR
+    Act["STRIPS Action Operator"] --> Pre["1. Preconditions:<br>Predicates required before execution"]
+    Act --> EffA["2. Add List:<br>Predicates that become True"]
+    Act --> EffD["3. Delete List:<br>Predicates that become False"]
+
+    classDef actStyle fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95;
+    classDef subStyle fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155;
+
+    class Act actStyle;
+    class Pre,EffA,EffD subStyle;
 ```
 
 > [!NOTE]
 > **The STRIPS Frame Assumption:**
 > Any world literal not explicitly stated in an action's Add or Delete list remains unchanged after action execution.
 
-#### Coffee Delivery Robot Problem Specification
+#### Coffee Delivery Robot Problem Pipeline
 
 ```mermaid
 flowchart LR
-    S0["Initial: {At: Office, HasCoffee: F, Delivered: F}"] -->|go_kitchen| S1["{At: Kitchen, HasCoffee: F, Delivered: F}"]
-    S1 -->|pick_coffee| S2["{At: Kitchen, HasCoffee: T, Delivered: F}"]
-    S2 -->|go_office| S3["{At: Office, HasCoffee: T, Delivered: F}"]
-    S3 -->|deliver| S4["Goal: {At: Office, HasCoffee: F, Delivered: T}"]
+    S0["S0: At Office, No Coffee"] -->|go_kitchen| S1["S1: At Kitchen, No Coffee"]
+    S1 -->|pick_coffee| S2["S2: At Kitchen, Has Coffee"]
+    S2 -->|go_office| S3["S3: At Office, Has Coffee"]
+    S3 -->|deliver| S4["S4: Goal Reached (Delivered)"]
+
+    classDef planStep fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class S0,S1,S2,S3,S4 planStep;
 ```
 
 | Action | Preconditions | Add List (Effects True) | Delete List (Effects False) |
@@ -1410,9 +1598,23 @@ $$P(D \mid +) = \frac{P(+ \mid D)P(D)}{P(+)} = \frac{0.009}{0.0585} \approx \mat
 
 ### 10.2 Conditional Independence & Network Topologies
 
-```
-Chain: A ──► B ──► C          Fork: A ◄── B ──► C          Collider: A ──► B ◄── C
-(A ⊥ C | B: Independent given B) (A ⊥ C | B: Independent given B) (A ⊥ C: Indep; Dependent given B!)
+```mermaid
+graph TD
+    subgraph Chain [1. Causal Chain: A → B → C]
+        C_A["Rain (A)"] --> C_B["Traffic (B)"] --> C_C["Late (C)"]
+        C_Note["A and C conditionally independent given B"]
+    end
+    subgraph Fork [2. Common Cause: A ← B → C]
+        F_A["Karim Late (A)"] <-- F_B["Traffic (B)"] --> F_C["Rahim Late (C)"]
+        F_Note["A and C conditionally independent given B"]
+    end
+    subgraph Collider [3. Collider / Explaining Away: A → B ← C]
+        CL_A["Burglary (A)"] --> CL_B["Alarm (B)"] <-- CL_C["Earthquake (C)"]
+        CL_Note["A and C independent; become dependent given B!"]
+    end
+
+    classDef boxStyle fill:#f8fafc,stroke:#475569,stroke-width:1px,color:#0f172a;
+    class C_A,C_B,C_C,F_A,F_B,F_C,CL_A,CL_B,CL_C boxStyle;
 ```
 
 > [!IMPORTANT]
@@ -1429,8 +1631,11 @@ $$P(X_1, X_2, \dots, X_n) = \prod_{i=1}^{n} P(X_i \mid \text{Parents}(X_i))$$
 
 ```mermaid
 graph TD
-    R["🌧️ Rain (R)<br>P(R)=0.3"] --> T["🚗 Traffic Jam (T)<br>P(T|R)=0.8, P(T|¬R)=0.2"]
-    T --> L["⏰ Late (L)<br>P(L|T)=0.6, P(L|¬T)=0.1"]
+    R["🌧️ Rain (R)<br>P(R) = 0.30"] --> T["🚗 Traffic Jam (T)<br>P(T given R)=0.8, P(T given ¬R)=0.2"]
+    T --> L["⏰ Late to Class (L)<br>P(L given T)=0.6, P(L given ¬T)=0.1"]
+
+    classDef bnNode fill:#f0f9ff,stroke:#0284c7,stroke-width:2px,color:#0369a1;
+    class R,T,L bnNode;
 ```
 
 #### Diagnostic Query Computation: $P(R \mid L)$
@@ -1464,10 +1669,15 @@ graph LR
     Cool -->|fast: 50%| Warm((Warm))
     Warm -->|slow: 50%| Cool
     Warm -->|slow: 50%| Warm
-    Warm -->|fast: 100%| Overheated(((Overheated -10)))
+    Warm -->|fast: 100%| Overheat((Overheated: -10))
 
-    classDef danger fill:#ffebee,stroke:#c62828,stroke-width:2px;
-    class Overheated danger;
+    classDef coolNode fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef warmNode fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef dangerNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+
+    class Cool coolNode;
+    class Warm warmNode;
+    class Overheat dangerNode;
 ```
 
 ---
@@ -1478,17 +1688,24 @@ HMM assumes true system state $X_t$ is hidden; agent only receives observations 
 
 ```mermaid
 graph LR
-    subgraph Hidden [Hidden States]
-        X1["X₁ (Rain/Sun)"] -->|T| X2["X₂ (Rain/Sun)"] -->|T| X3["X₃ (Rain/Sun)"]
+    subgraph HiddenTrellis [Hidden Weather State Timeline]
+        X1["X1: Rain/Sun"] -->|Transition P| X2["X2: Rain/Sun"] -->|Transition P| X3["X3: Rain/Sun"]
     end
-    subgraph Observed [Observations]
-        E1["E₁ (Umbrella)"]
-        E2["E₂ (Umbrella)"]
-        E3["E₃ (Umbrella)"]
+    subgraph ObservedTrellis [Observed Evidence Timeline]
+        E1["E1: Umbrella?"]
+        E2["E2: Umbrella?"]
+        E3["E3: Umbrella?"]
     end
-    X1 -->|Emission| E1
-    X2 -->|Emission| E2
-    X3 -->|Emission| E3
+
+    X1 -->|Emission P| E1
+    X2 -->|Emission P| E2
+    X3 -->|Emission P| E3
+
+    classDef hStyle fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95;
+    classDef oStyle fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+
+    class X1,X2,X3 hStyle;
+    class E1,E2,E3 oStyle;
 ```
 
 - **Forward Algorithm (Filtering):** Computes current belief state $P(X_t \mid e_{1:t})$.
@@ -1526,6 +1743,16 @@ print(f"Day 2 Belief P(Rain|U1, U2): {f2[0]:.4f}")  # Output: 0.8829
 
 ---
 
+### Chapter 10 Quick Check
+
+<details>
+<summary><b>🔍 Self-Check Question 1:</b> In a Bayes Net with a collider topology (A → B ← C), are A and C conditionally independent given B?</summary>
+
+**No.** In a collider structure, $A$ and $C$ are marginally independent, but they become **conditionally dependent** when conditioned on their common child $B$ (the Explaining Away phenomenon).
+</details>
+
+---
+
 ## Chapter 11 — Reinforcement Learning (RL)
 
 > **In One Line:** Reinforcement learning solves unknown MDPs through trial-and-error interactions, balancing exploration of novel actions with exploitation of rewarded behaviors.
@@ -1534,9 +1761,15 @@ print(f"Day 2 Belief P(Rain|U1, U2): {f2[0]:.4f}")  # Output: 0.8829
 
 ```mermaid
 flowchart TD
-    A["🤖 Agent (Policy π)"] -->|Action aₜ| E["🌐 Environment"]
-    E -->|Reward rₜ₊₁| A
-    E -->|Next State sₜ₊₁| A
+    Agent["🤖 Agent (Policy π)"] -->|Action a_t| Env["🌐 Environment (Unknown MDP)"]
+    Env -->|Reward r_t+1| Agent
+    Env -->|Next State s_t+1| Agent
+
+    classDef agStyle fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef envStyle fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class Agent agStyle;
+    class Env envStyle;
 ```
 
 - **Credit Assignment Problem:** Determining which past action sequence deserved praise for delayed terminal rewards.
@@ -1567,14 +1800,20 @@ $$Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(
 
 ```mermaid
 flowchart TD
-    Init[Initialize Q Table Q_s_a = 0] --> LoopState[Observe Current State s]
-    LoopState --> ChooseAct[Select action a via ε-greedy]
-    ChooseAct --> ExecAct[Execute a: Observe r and s']
-    ExecAct --> UpdateQ["Q(s,a) ← Q(s,a) + α [r + γ max_a' Q(s',a') - Q(s,a)]"]
-    UpdateQ --> NextState[s ← s']
-    NextState --> EndCheck{Episode Terminal?}
-    EndCheck -- No --> ChooseAct
-    EndCheck -- Yes --> LoopState
+    Init["Initialize Q-Table Q(s, a) = 0"] --> Observe["Observe State s"]
+    Observe --> ActSelect["Choose Action a via ε-greedy"]
+    ActSelect --> Exec["Take action a: Receive r and Next State s'"]
+    Exec --> QUpdate["Update Q: Q(s,a) ← Q(s,a) + α · TD_Error"]
+    QUpdate --> NextState["Transition: s ← s'"]
+    NextState --> CheckTerm{"Is Episode Finished?"}
+    CheckTerm -- No --> ActSelect
+    CheckTerm -- Yes --> Observe
+
+    classDef step fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef dec fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+
+    class Init,Observe,ActSelect,Exec,QUpdate,NextState step;
+    class CheckTerm dec;
 ```
 
 #### Step-by-Step Two-Episode Trace (Corridor World)
