@@ -1693,17 +1693,8 @@ where:
 - $\gamma$ = Discount factor
 
 The Bellman optimality equation is:
-
 $$
-V^*(s) =
-\max_{a \in A}
-\sum_{s'}
-P(s' \mid s,a)
-\left[
-R(s,a,s')
-+
-\gamma V^*(s')
-\right]
+V^*(s) = \max_{a \in A} \sum_{s'} P(s' \mid s,a) [R(s,a,s') + \gamma V^*(s')]
 $$
 
 where $V^*(s)$ represents the optimal value of state $s$.
