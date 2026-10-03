@@ -1717,6 +1717,7 @@ graph LR
     class Cool coolNode
     class Warm warmNode
     class Overheat dangerNode
+```
 
 ---
 
