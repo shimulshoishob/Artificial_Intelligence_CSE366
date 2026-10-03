@@ -1694,7 +1694,17 @@ where:
 
 The Bellman optimality equation is:
 
-$$ V^*(s) = \max_{a \in A} \sum_{s'} P(s' \mid s,a) \left[ R(s,a,s') + \gamma V^*(s') \right] $$
+$$
+V^*(s) =
+\max_{a \in A}
+\sum_{s'}
+P(s' \mid s,a)
+\left[
+R(s,a,s')
++
+\gamma V^*(s')
+\right]
+$$
 
 where $V^*(s)$ represents the optimal value of state $s$.
 
